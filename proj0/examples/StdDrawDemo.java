@@ -1,4 +1,4 @@
-/* 
+/*
  *
  * Make sure to see the more detailed description of
  * StdDraw at: http://introcs.cs.princeton.edu/java/15inout/ 
@@ -6,7 +6,7 @@
  * The link above also provides additional examples like BouncingBall.java
  *
  * Or you can see the full documentation at:
- *   http://introcs.cs.princeton.edu/java/15inout/javadoc/StdDraw.html
+ *   http://introcs.cs.pinceton.edu/java/15inout/javadoc/StdDraw.html
  */
 
 public class StdDrawDemo {
@@ -28,7 +28,8 @@ public class StdDrawDemo {
 
 		/* Shows the drawing to the screen, and waits 2000 milliseconds. */
 		StdDraw.show();
-		StdDraw.pause(2000);		
+		StdDraw.pause(2000);
+
 	}
 
 	/* Draws random copies of the image, clearing in between
