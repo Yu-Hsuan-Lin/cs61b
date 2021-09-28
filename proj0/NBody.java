@@ -1,18 +1,19 @@
 public class NBody {
-	static String fileName = "./data/planets.txt";
-	static In in = new In(fileName);
-
-	static int num = in.readInt();
-	static Planet[] planets = new Planet[num];
-
-	static double readRadius(String fileName) {
+	public static double readRadius(String fileName) {	
+		In in = new In(fileName);
+		int num = in.readInt();
 		double radius = in.readDouble();
 		return radius;
 	}
 
-	static Planet[] readPlanets(String fileName) {
+	public static Planet[] readPlanets(String fileName) {
 		int count = 0;
-		// double radius = in.readDouble();
+
+		In in = new In(fileName);
+		int num = in.readInt();
+		Planet[] planets = new Planet[num];
+		in.readDouble();
+
 		for (int i = 0; i < 5; i ++) {
 			double line = in.readDouble();
 			double line1 = in.readDouble();
@@ -30,13 +31,23 @@ public class NBody {
 	public static void main(String[] args) {
 		double T = Double.parseDouble(args[0]);
 		double dt = Double.parseDouble(args[1]);
-		String filename = args[2];
+		String fileName = args[2];
 		double radius = readRadius(fileName);
 		Planet[] planets = readPlanets(fileName);
 
-		// Set the scale
+		/* Set the scale */
 		StdDraw.setScale(-radius, radius);
+		StdDraw.clear();
+		StdDraw.picture(0, 0, "./images/starfield.jpg");
 
+
+		/* Draw all the planets */
+		for (int i = 0; i < planets.length; i ++) {
+			planets[i].draw();
+		}
+		StdDraw.show();
+
+		/* Add the animation */
 		for (int t = 0; t < T; t += dt) {
 			StdDraw.enableDoubleBuffering();
 			StdDraw.picture(0, 0, "./images/starfield.jpg");
