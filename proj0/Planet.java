@@ -93,7 +93,7 @@ public class Planet {
 	}
 
 	public void draw() {
-		String name = "./images/" + imgFileName;
+		String name = "images/" + imgFileName;
 		StdDraw.picture(xxPos, yyPos, name);
 	}
 

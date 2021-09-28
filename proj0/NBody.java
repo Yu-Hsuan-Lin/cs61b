@@ -38,7 +38,7 @@ public class NBody {
 		/* Set the scale */
 		StdDraw.setScale(-radius, radius);
 		StdDraw.clear();
-		StdDraw.picture(0, 0, "./images/starfield.jpg");
+		StdDraw.picture(0, 0, "images/starfield.jpg");
 
 
 		/* Draw all the planets */
@@ -50,7 +50,7 @@ public class NBody {
 		/* Add the animation */
 		for (int t = 0; t < T; t += dt) {
 			StdDraw.enableDoubleBuffering();
-			StdDraw.picture(0, 0, "./images/starfield.jpg");
+			StdDraw.picture(0, 0, "images/starfield.jpg");
 			StdDraw.show();
 			
 			double[] xForces = new double[planets.length];
