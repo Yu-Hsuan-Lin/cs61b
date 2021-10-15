@@ -11,18 +11,18 @@ public class LinkedListDeque<T> {
         }
     }
     private TNode sentinel; //circular sentinel: sentinel.prev = sentinel, sentinel.next = sentinel;
-    public int size;
+    private int size;
     public LinkedListDeque() {
         sentinel = new TNode(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
     }
-    public LinkedListDeque(T x) {
+    /*public LinkedListDeque(T x) {
         sentinel = new TNode(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = new TNode (this.sentinel, x, this.sentinel);
         size ++;
-    }
+    }*/
     public void addFirst(T item) {
         sentinel.next = new TNode(sentinel, item, sentinel.next);
         size ++;

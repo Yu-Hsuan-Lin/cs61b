@@ -1,7 +1,7 @@
 /** The difference between ArrayDeque and AList? */
 public class ArrayDeque<T> {
-    public T[] item;
-    private int size;
+    private T[] item;
+    public int size;
     public int nextFirst;
     public int nextLast;
     public int first;
@@ -15,7 +15,7 @@ public class ArrayDeque<T> {
         nextLast = nextFirst + 1;
     }
     // adjust starting point
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] newI = (T[]) new Object[capacity];
         int start = 0;
         // If capacity > size
