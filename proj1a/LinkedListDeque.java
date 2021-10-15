@@ -10,7 +10,7 @@ public class LinkedListDeque<T> {
             this.prev = prev;
         }
     }
-    private TNode sentinel; //circular sentinel: sentinel.prev = sentinel, sentinel.next = sentinel;
+    private TNode sentinel;  // circular sentinel: sentinel.prev = sentinel, sentinel.next = sentinel;
     private int size;
     public LinkedListDeque() {
         sentinel = new TNode(null, null, null);
@@ -25,11 +25,17 @@ public class LinkedListDeque<T> {
     }*/
     public void addFirst(T item) {
         sentinel.next = new TNode(sentinel, item, sentinel.next);
-        size ++;
+        if (sentinel.prev.item == null) {
+            sentinel.prev = sentinel.next;
+        }
+        size++;
     }
     public void addLast(T item) {
         sentinel.prev = new TNode(sentinel.prev, item, sentinel);
-        size ++;
+        if (sentinel.next.item == null) {
+            sentinel.next = sentinel.prev;
+        }
+        size++;
     }
     public boolean isEmpty() {
         return sentinel.next.item == null;
@@ -51,20 +57,22 @@ public class LinkedListDeque<T> {
     }
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
     public T removeFirst() {
-        size --;
         if (sentinel.next.item == null) {
             return null;
         }
+        size--;
+        T hold = sentinel.next.item;
         sentinel.next = sentinel.next.next;
-        return sentinel.next.item;
+        return hold;
     }
     public T removeLast() {
-        size --;
         if (sentinel.next.item == null) {
             return null;
         }
+        size--;
+        T hold = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
-        return sentinel.prev.item;
+        return hold;
     }
     public T get(int index) {
         TNode p = sentinel.next;

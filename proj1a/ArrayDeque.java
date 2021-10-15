@@ -1,12 +1,12 @@
 /** The difference between ArrayDeque and AList? */
 public class ArrayDeque<T> {
     private T[] item;
-    public int size;
-    public int nextFirst;
-    public int nextLast;
-    public int first;
-    public int last;
-    public int mid;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
+    private int first;
+    private int last;
+    private int mid;
     public ArrayDeque() {
         item = (T[]) new Object[8];
         size = 0;
@@ -14,22 +14,22 @@ public class ArrayDeque<T> {
         nextFirst = (int) (item.length / 2);
         nextLast = nextFirst + 1;
     }
-    // adjust starting point
+     // adjust starting point
     private void resize(int capacity) {
         T[] newI = (T[]) new Object[capacity];
         int start = 0;
-        // If capacity > size
+         // If capacity > size
         if (capacity > item.length) {
             start = (int) (capacity / 2 - size / 2);
             if (first > mid) {
-                // from first to item.length - 1
+                 // from first to item.length - 1
                 System.arraycopy(item, first, newI, start, item.length - 1 - first);
                 System.arraycopy(item, 0, newI, item.length - 1 - first + 1, last + 1);
             } else if (last < mid) {
                 System.arraycopy(item, first, newI, start, item.length - 1 - first);
                 System.arraycopy(item, 0, newI, item.length - 1 - first, last + 1);
             } else {
-                // from 0 to item.length - 1
+                 // from 0 to item.length - 1
                 System.arraycopy(item, 0, newI, start, size);
             }
             first = start;
@@ -38,7 +38,7 @@ public class ArrayDeque<T> {
             nextLast = last + 1;
 
         } else {
-            // If capacity < size
+             // If capacity < size
             start = (int) (capacity / 2 - size/2);
             System.arraycopy(item, first, newI, start, size);
             first = start;
@@ -61,8 +61,11 @@ public class ArrayDeque<T> {
         }
         item[nextFirst] = x;
         first = nextFirst;
-        nextFirst --;   // -1
-        size ++;
+        if (size == 0) {
+            last = first;
+        }
+        nextFirst--;   // -1
+        size++;
     }
     public void addLast(T x) {
         if (size >= item.length) {
@@ -73,19 +76,22 @@ public class ArrayDeque<T> {
         }
         item[nextLast] = x;
         last = nextLast;
-        nextLast ++;
-        size ++;
+        if (size == 0) {
+            first = last;
+        }
+        nextLast++;
+        size++;
     }
     public boolean isEmpty() {
-        return item[0] == null;
+        return item[first] == null;
     }
     public int size() {
         return size;
     }
     public void printDeque() {
-        //System.out.println(item.length);
-//        System.out.println("print: " + "first: " + first + " last: " + last + " mid: " + mid);
-        // If first starts from back. (In this case, last should always > mid)
+         // System.out.println(item.length);
+ //        System.out.println("print: " + "first: " + first + " last: " + last + " mid: " + mid);
+         // If first starts from back. (In this case, last should always > mid)
         if ((first > mid && item[0] != null) || (last < mid && item[item.length - 1] != null)) {
             for (int i = first; i < item.length; i ++) {
                 System.out.print(item[i] + " ");
@@ -103,33 +109,41 @@ public class ArrayDeque<T> {
     }
     /** Add and remove must take constant time. */
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         double now = (double) size / item.length;
-        if (now <= 0.25 ) {
+        if (now < 0.25 ) {
             resize(item.length / 2);
         }
+        T hold = item[first];
         item[first] = null;
         nextFirst = first;
         if (first == item.length - 1) {
             first = 0;
         } else {
-            first ++;
+            first++;
         }
-        size --;
-        return item[first];
+        size--;
+        return hold;
     }
     public T removeLast() {
-        if (size / item.length <= 0.25 ) {
+        if (size == 0) {
+            return null;
+        }
+        if (size / item.length < 0.25 ) {
             resize(item.length / 2);
         }
+        T hold = item[last];
         item[last] = null;
         nextLast = last;
         if (last == 0) {
             last = item.length - 1;
         } else {
-            last --;
+            last--;
         }
-        size --;
-        return item[first];
+        size--;
+        return hold;
     }
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null.*/
     public T get(int index) {

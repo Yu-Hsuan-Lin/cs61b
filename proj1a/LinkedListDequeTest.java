@@ -84,11 +84,12 @@ public class LinkedListDequeTest {
 		addIsEmptySizeTest();
 		addRemoveTest();
 		LinkedListDeque<Integer> lld = new LinkedListDeque<>();
-		lld.addFirst(1);
-		lld.addFirst(2);
-		lld.addFirst(3);
-		lld.addFirst(4);
-		System.out.println(lld.removeFirst());
+		lld.addFirst(0);
+		lld.addLast(1);
+		lld.getRecursive(0);
+		lld.addLast(3);
+		System.out.println(lld.removeLast());  // 11
+
 
 
 	}
