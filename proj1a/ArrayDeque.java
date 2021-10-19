@@ -20,14 +20,19 @@ public class ArrayDeque<T> {
         int start = 0;
          // If capacity > size
         if (capacity > item.length) {
+            //start = (int) capacity / 2;
             start = (int) (capacity / 2 - size / 2);
             if (first > mid) {
                  // from first to item.length - 1
-                System.arraycopy(item, first, newI, start, item.length - 1 - first);
-                System.arraycopy(item, 0, newI, item.length - 1 - first + 1, last + 1);
+                int length1 = item.length - 1 - first + 1;
+                System.arraycopy(item, first, newI, start, length1);
+                int length2 = last + 1;
+                System.arraycopy(item, 0, newI, start + length1, length2);
             } else if (last < mid) {
-                System.arraycopy(item, first, newI, start, item.length - 1 - first);
-                System.arraycopy(item, 0, newI, item.length - 1 - first, last + 1);
+                int length1 = item.length - 1 - first + 1;
+                System.arraycopy(item, first, newI, start, length1);
+                int length2 = last + 1;
+                System.arraycopy(item, 0, newI, start +length1, length2);
             } else {
                  // from 0 to item.length - 1
                 System.arraycopy(item, 0, newI, start, size);
@@ -90,7 +95,7 @@ public class ArrayDeque<T> {
     }
     public void printDeque() {
          // System.out.println(item.length);
- //        System.out.println("print: " + "first: " + first + " last: " + last + " mid: " + mid);
+         // System.out.println("print: " + "first: " + first + " last: " + last + " mid: " + mid);
          // If first starts from back. (In this case, last should always > mid)
         if ((first > mid && item[0] != null) || (last < mid && item[item.length - 1] != null)) {
             for (int i = first; i < item.length; i ++) {
@@ -131,7 +136,8 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if (size / item.length < 0.25 ) {
+        double now = (double) size / item.length;
+        if (now < 0.25 ) {
             resize(item.length / 2);
         }
         T hold = item[last];
@@ -147,9 +153,15 @@ public class ArrayDeque<T> {
     }
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null.*/
     public T get(int index) {
-        int getIndex = (int) (item.length / 2) + index;
+        /* int getIndex = (int) (item.length / 2) + index;
         if (getIndex >= item.length) {
             getIndex -= item.length;
+        }*/
+        int getIndex = 0;
+        if (first + index > item.length - 1) {
+           getIndex = index - (item.length - 1 - first + 1);
+        } else {
+            getIndex = first + index;
         }
         return item[getIndex];
     }

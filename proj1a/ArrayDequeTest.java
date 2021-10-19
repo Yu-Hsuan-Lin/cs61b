@@ -48,6 +48,26 @@ public class ArrayDequeTest {
 
         System.out.println(a2.removeLast());  // 4
 
+        System.out.println("---------------------------");
+        ArrayDeque<Integer> a3 = new ArrayDeque<>();
+        /*a3.addFirst(0);
+        a3.addFirst(1);
+        a3.addFirst(2);
+        a3.addFirst(3);
+        a3.addFirst(4);
+        a3.addFirst(5);
+        System.out.println(a3.get(3));
+        a3.printDeque();
+        a3.addFirst(6);
+        a3.addLast(-1);
+        a3.addLast(-2);
+        a3.printDeque();
+        System.out.println(a3.removeFirst());
+        a3.printDeque();
+        System.out.println(a3.get(3));*/
+        a3.addLast(0);
+        System.out.println(a3.get(0));
+
 
 
 
