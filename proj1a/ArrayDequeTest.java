@@ -21,15 +21,12 @@ public class ArrayDequeTest {
         a.addFirst(1);
         a.addFirst(0);
         a.printDeque();
-        // System.out.println("first: " + a.first + " nextFirst: " + a.nextFirst + " last: " + a.nextLast);
         System.out.println("----removeFirst------------");
         a.removeFirst();
-        // System.out.println("first: " + a.first + " nextFirst: " + a.nextFirst + " last: " + a.nextLast);
-       /* System.out.println(a.item.length);*/
         a.addLast(7);
         a.addLast(8);
         a.printDeque();
-        // System.out.println("first: " + a.first + " nextFirst: " + a.nextFirst + " last: " + a.nextLast);
+
         a.addLast(9);
         a.printDeque();
         a.removeFirst();

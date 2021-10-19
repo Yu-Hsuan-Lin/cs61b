@@ -10,7 +10,7 @@ public class LinkedListDeque<T> {
             this.prev = prev;
         }
     }
-    private TNode sentinel;  // circular sentinel: sentinel.prev = sentinel, sentinel.next = sentinel;
+    private TNode sentinel;
     private int size;
     public LinkedListDeque() {
         sentinel = new TNode(null, null, null);
@@ -52,7 +52,7 @@ public class LinkedListDeque<T> {
         }
         System.out.println();
     }
-    /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
+    /** Removes and returns the item. If no such item exists, returns null.*/
     public T removeFirst() {
         if (size == 0) {   // empty linkedList
             return null;
@@ -80,7 +80,7 @@ public class LinkedListDeque<T> {
         if (index >= size) {
             return null;
         }
-        for (int i = 1; i < index + 1; i ++) {
+        for (int i = 1; i < index + 1; i++) {
             p = p.next;
         }
         return p.item;
