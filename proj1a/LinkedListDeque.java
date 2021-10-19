@@ -60,7 +60,7 @@ public class LinkedListDeque<T> {
         size--;
         T hold = sentinel.next.item;
         sentinel.next = sentinel.next.next;
-        sentinel.next.prev = sentinel.next;
+        sentinel.next.prev = sentinel;
 
         return hold;
     }

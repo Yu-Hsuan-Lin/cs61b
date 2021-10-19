@@ -85,19 +85,15 @@ public class LinkedListDequeTest {
 		addRemoveTest();
 		LinkedListDeque<Integer> lld = new LinkedListDeque<>();
 		lld.addLast(0);
-		System.out.println(lld.removeFirst());
-		lld.addLast(3);
-		lld.addLast(2);
 		lld.addLast(1);
-		lld.addLast(0);
+		lld.removeFirst();
+		lld.getRecursive(0);
+		System.out.println(lld.removeLast());
+		lld.addFirst(7);
+		System.out.println(lld.removeLast());
+		lld.addFirst(8);
 		System.out.println(lld.removeFirst());
-		System.out.println(lld.removeFirst());
-		System.out.println(lld.removeFirst());
-		System.out.println(lld.removeFirst());
-		lld.addLast(1);
-		lld.addLast(2);
-		System.out.println(lld.get(1));
-		System.out.println(lld.removeFirst());
+		System.out.println(lld.removeLast());
 
 
 
@@ -108,4 +104,4 @@ public class LinkedListDequeTest {
 
 
 	}
-} 
+}
