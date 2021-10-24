@@ -1,6 +1,10 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+/* Note: testWordToDeque:
+        why we didn’t just create a correct Deque
+        and then call assertEquals. The reason is that our Deque class
+        does not provide an equals method
+        and thus it won’t work. */
 public class TestPalindrome {
     // You must use this palindrome, and not instantiate
     // new Palindromes, or the autograder might be upset.
@@ -13,9 +17,6 @@ public class TestPalindrome {
         for (int i = 0; i < "persiflage".length(); i++) {
             actual += d.removeFirst();
         }
-       /* Note: The careful reader of testWordToDeque might wonder why we didn’t just create a correct Deque
-        and then call assertEquals. The reason is that our Deque class does not provide an equals method
-        and thus it won’t work the way you expect. We’ll be talking about this in class soon.*/
         assertEquals("persiflage", actual);
     }
 
@@ -142,7 +143,7 @@ public class TestPalindrome {
         }
 
 
-        word = "flaae";
+        word = "flake";
         CharacterComparator cc = new OffByOne();
         if (word.length() == 0 || word.length() == 1) {
             assertTrue(palindrome.isPalindrome(word, cc));
@@ -155,6 +156,24 @@ public class TestPalindrome {
                     break;
                 } else if (i == lastIndex / 2) {
                     assertTrue(palindrome.isPalindrome(word, cc));
+                    break;
+                }
+            }
+        }
+
+        word = "flaKe";
+        CharacterComparator cc102 = new OffByOne();
+        if (word.length() == 0 || word.length() == 1) {
+            assertTrue(palindrome.isPalindrome(word, cc));
+        } else {
+            int lastIndex = word.length() - 1;
+            for (int i = 0; i < lastIndex / 2 + 1; i++) {
+                int diff = word.charAt(i) - word.charAt(lastIndex - i);
+                if (i != lastIndex / 2 && Math.abs(diff) != 1) {
+                    assertFalse(palindrome.isPalindrome(word, cc102));
+                    break;
+                } else if (i == lastIndex / 2) {
+                    assertTrue(palindrome.isPalindrome(word, cc102));
                     break;
                 }
             }
@@ -224,7 +243,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc8).n != diff)) {
+                    if ((i != lastIndex / 2) && (((OffByN)cc8).getN() != diff)) {
                         assertFalse(palindrome.isPalindrome(word, cc8));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -235,7 +254,6 @@ public class TestPalindrome {
             }
         }
 
-
         word = "tidy";
         CharacterComparator cc9 = new OffByN(5);
         if (cc9 instanceof OffByN) {
@@ -245,7 +263,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc9).n != diff)) {
+                    if ((i != lastIndex / 2) && (((OffByN)cc9).getN() != diff)) {
                         assertFalse(palindrome.isPalindrome(word, cc9));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -256,7 +274,6 @@ public class TestPalindrome {
             }
         }
 
-
         word = "tiny";
         CharacterComparator cc10 = new OffByN(5);
         if (cc10 instanceof OffByN) {
@@ -266,7 +283,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc10).n != diff)) {
+                    if ((i != lastIndex / 2) && (((OffByN)cc10).getN() != diff)) {
                         assertFalse(palindrome.isPalindrome(word, cc10));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -276,6 +293,5 @@ public class TestPalindrome {
                 }
             }
         }
-
     }
 }

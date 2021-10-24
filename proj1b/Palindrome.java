@@ -29,7 +29,7 @@ public class Palindrome {
         if (d.size() == 0 || d.size() == 1) {
             return true;
         }
-        if (cc.equalChars((char)d.removeFirst(), (char)d.removeLast())) {
+        if (cc.equalChars((char) d.removeFirst(), (char) d.removeLast())) {
             return isPalindrome(d, cc);
         }
         return false;
