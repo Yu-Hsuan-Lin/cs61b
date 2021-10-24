@@ -1,4 +1,7 @@
 import org.junit.Test;
+
+import java.util.Locale;
+
 import static org.junit.Assert.*;
 /* Note: testWordToDeque:
         why we didn’t just create a correct Deque
@@ -20,7 +23,6 @@ public class TestPalindrome {
         assertEquals("persiflage", actual);
     }
 
-    // Source: http://junit.sourceforge.net/javadoc/org/junit/Assert.html
     @Test
     public void testIsPalindrome() {
         String word = "cat";
@@ -243,7 +245,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc8).getN() != diff)) {
+                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
                         assertFalse(palindrome.isPalindrome(word, cc8));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -263,7 +265,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc9).getN() != diff)) {
+                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
                         assertFalse(palindrome.isPalindrome(word, cc9));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -283,7 +285,7 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (((OffByN)cc10).getN() != diff)) {
+                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
                         assertFalse(palindrome.isPalindrome(word, cc10));
                         break;
                     } else if (i == lastIndex / 2) {
