@@ -296,4 +296,10 @@ public class TestPalindrome {
             }
         }
     }
+
+    @Test
+    public void testIsPalindromeUpper() {
+        CharacterComparator cc = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("aMuOzHf", cc));
+    }
 }
