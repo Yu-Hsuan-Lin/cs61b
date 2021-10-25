@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.Locale;
-
 import static org.junit.Assert.*;
 /* Note: testWordToDeque:
         why we didn’t just create a correct Deque
@@ -26,7 +24,8 @@ public class TestPalindrome {
     @Test
     public void testIsPalindrome() {
         String word = "cat";
-        if (word.length() == 0 || word.length() == 1) {
+        assertFalse(palindrome.isPalindrome("cat"));
+       /* if (word.length() == 0 || word.length() == 1) {
             assertTrue(palindrome.isPalindrome(word));
         } else {
             int lastIndex = word.length() - 1;
@@ -38,114 +37,28 @@ public class TestPalindrome {
                     assertTrue(palindrome.isPalindrome(word));
                 }
             }
-        }
+        }*/
+
         word = "racecar";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word));
         word = "";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word));
         word = "a";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word));
         word = "noon";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word));
         word = "moon";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertFalse(palindrome.isPalindrome(word));
         word = "promp";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
-
+        assertFalse(palindrome.isPalindrome(word));
         word = "pomp";
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word));
-        } else {
-            int lastIndex = word.length() - 1;  //3
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {   //2
-                if (word.charAt(i) != word.charAt(lastIndex - i)) {
-                    assertFalse(palindrome.isPalindrome(word));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word));
-                }
-            }
-        }
+        assertFalse(palindrome.isPalindrome(word));
 
+    }
 
-        word = "flake";
+    @Test
+     public void testIsPalindromeOffByOne() {
+        String word = "flake";
         CharacterComparator cc = new OffByOne();
         if (word.length() == 0 || word.length() == 1) {
             assertTrue(palindrome.isPalindrome(word, cc));
@@ -164,79 +77,18 @@ public class TestPalindrome {
         }
 
         word = "flaKe";
-        CharacterComparator cc102 = new OffByOne();
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word, cc));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                int diff = word.charAt(i) - word.charAt(lastIndex - i);
-                if (i != lastIndex / 2 && Math.abs(diff) != 1) {
-                    assertFalse(palindrome.isPalindrome(word, cc102));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word, cc102));
-                    break;
-                }
-            }
-        }
-
+        assertFalse(palindrome.isPalindrome(word, cc));
         word = "&%";
-        CharacterComparator cc2 = new OffByOne();
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word, cc2));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                int diff = word.charAt(i) - word.charAt(lastIndex - i);
-                if (i != lastIndex / 2 && Math.abs(diff) != 1) {
-                    assertFalse(palindrome.isPalindrome(word, cc2));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word, cc2));
-                    break;
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word, cc));
         word = "spot";
-        CharacterComparator cc3 = new OffByOne();
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word, cc3));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                int diff = word.charAt(i) - word.charAt(lastIndex - i);
-                if (i != lastIndex / 2 && Math.abs(diff) != 1) {
-                    assertFalse(palindrome.isPalindrome(word, cc3));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word, cc3));
-                    break;
-                }
-            }
-        }
-
+        assertTrue(palindrome.isPalindrome(word, cc));
         word = "s";
-        CharacterComparator cc4 = new OffByOne();
-        if (word.length() == 0 || word.length() == 1) {
-            assertTrue(palindrome.isPalindrome(word, cc4));
-        } else {
-            int lastIndex = word.length() - 1;
-            for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                int diff = word.charAt(i) - word.charAt(lastIndex - i);
-                if (i != lastIndex / 2 && Math.abs(diff) != 1) {
-                    assertFalse(palindrome.isPalindrome(word, cc4));
-                    break;
-                } else if (i == lastIndex / 2) {
-                    assertTrue(palindrome.isPalindrome(word, cc4));
-                    break;
-                }
-            }
-        }
+        assertTrue(palindrome.isPalindrome(word, cc));
+    }
 
-
-        word = "six";
+    @Test
+    public void testIsPalindromeOffByN() {
+        String word = "six";
         CharacterComparator cc8 = new OffByN(5);
         if (cc8 instanceof OffByN) {
             if (word.length() == 0 || word.length() == 1) {
@@ -245,7 +97,8 @@ public class TestPalindrome {
                 int lastIndex = word.length() - 1;
                 for (int i = 0; i < lastIndex / 2 + 1; i++) {
                     int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
+                    if ((i != lastIndex / 2) &&
+                            (!cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
                         assertFalse(palindrome.isPalindrome(word, cc8));
                         break;
                     } else if (i == lastIndex / 2) {
@@ -257,49 +110,24 @@ public class TestPalindrome {
         }
 
         word = "tidy";
-        CharacterComparator cc9 = new OffByN(5);
-        if (cc9 instanceof OffByN) {
-            if (word.length() == 0 || word.length() == 1) {
-                assertTrue(palindrome.isPalindrome(word, cc9));
-            } else {
-                int lastIndex = word.length() - 1;
-                for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                    int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
-                        assertFalse(palindrome.isPalindrome(word, cc9));
-                        break;
-                    } else if (i == lastIndex / 2) {
-                        assertTrue(palindrome.isPalindrome(word, cc9));
-                        break;
-                    }
-                }
-            }
-        }
-
+        assertFalse(palindrome.isPalindrome(word, cc8));
         word = "tiny";
-        CharacterComparator cc10 = new OffByN(5);
-        if (cc10 instanceof OffByN) {
-            if (word.length() == 0 || word.length() == 1) {
-                assertTrue(palindrome.isPalindrome(word, cc10));
-            } else {
-                int lastIndex = word.length() - 1;
-                for (int i = 0; i < lastIndex / 2 + 1; i++) {
-                    int diff = Math.abs(word.charAt(i) - word.charAt(lastIndex - i));
-                    if ((i != lastIndex / 2) && (! cc8.equalChars(word.charAt(i), word.charAt(lastIndex - i)))) {
-                        assertFalse(palindrome.isPalindrome(word, cc10));
-                        break;
-                    } else if (i == lastIndex / 2) {
-                        assertTrue(palindrome.isPalindrome(word, cc10));
-                        break;
-                    }
-                }
-            }
-        }
+        assertTrue(palindrome.isPalindrome(word, cc8));
     }
 
     @Test
     public void testIsPalindromeUpper() {
         CharacterComparator cc = new OffByN(5);
         assertTrue(palindrome.isPalindrome("aMuOzHf", cc));
+        assertFalse(palindrome.isPalindrome("", cc));
+
+        CharacterComparator cc2 = new OffByOne();
+        assertTrue(palindrome.isPalindrome("aDrCb", cc2));
+    }
+
+    @Test
+    public void testIsPalindromeUpperOne() {
+        CharacterComparator cc = new OffByOne();
+        assertFalse(palindrome.isPalindrome("Ba", cc));
     }
 }
