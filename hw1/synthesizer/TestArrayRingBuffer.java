@@ -49,12 +49,12 @@ public class TestArrayRingBuffer {
     public static void main(String[] args) {
         jh61b.junit.textui.runClasses(TestArrayRingBuffer.class);
         ArrayRingBuffer<Integer> a = new ArrayRingBuffer<>(6);
-        //TestException
-        //a.dequeue();
-        for (int i = 0; i < 6; i++) {
+        // TestException
+        // a.dequeue();
+       /* For (int i = 0; i < 6; i++) {
             a.enqueue(i);
         }
-        a.enqueue(7);
+        a.enqueue(7);*/
         for (int i = 0; i < 6; i ++) {
             a.enqueue(i);
         }
