@@ -16,7 +16,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     private class BoundedIterator implements Iterator<T> {
         private int wizPos;
         private int lastPos;
-        private int halfPos;
         public BoundedIterator() {
             wizPos = first;
             lastPos = last;
