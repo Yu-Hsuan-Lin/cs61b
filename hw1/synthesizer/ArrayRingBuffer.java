@@ -1,9 +1,8 @@
 package synthesizer;
-import synthesizer.AbstractBoundedQueue;
 
 import java.util.Iterator;
 
-public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Iterable<T> {
+public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
@@ -16,29 +15,41 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
     }
     private class BoundedIterator implements Iterator<T> {
         private int wizPos;
+        private int lastPos;
+        private int halfPos;
         public BoundedIterator() {
-            wizPos = 0;
+            wizPos = first;
+            lastPos = last;
         }
         public boolean hasNext() {
-            return wizPos < fillCount();
+            if (first < last) {
+                return wizPos < last;
+            }
+            return wizPos > first || wizPos < last;
+
         }
         public T next() {
-            T returnItem = getRb()[wizPos];
-            wizPos++;
+            T returnItem = rb[wizPos];
+            if (first <= last) {
+                wizPos++;
+            } else {
+                if (wizPos == first) {
+                    wizPos = 0;
+                } else {
+                    wizPos++;
+                }
+            }
             return returnItem;
         }
     }
 
-    public T[] getRb() {
-        return rb;
-    }
     /**
      * Create a new ArrayRingBuffer with the given capacity.
      */
     public ArrayRingBuffer(int capacity) {
         rb = (T[]) new Object[capacity];
-        first = capacity /2;
-        last = capacity /2;
+        first = capacity / 2;
+        last = capacity / 2;
         fillCount = 0;
         this.capacity = capacity;
     }
@@ -87,6 +98,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
      * Return oldest item, but don't remove it.
      */
     public T peek() {
+        if (fillCount() == 0) {
+            throw new RuntimeException("Ring Buffer Underflow");
+        }
         return rb[first];
     }
 }
